@@ -7,15 +7,14 @@ const userRoutes = require('./routes/userRoutes'); // Import user routes
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'build')));
 
 // MongoDB connection
 mongoose.connect('mongodb://root:xY6Sx8WNgMHOifqeFXsS2pN8@denali.liara.cloud:31058/my-app?authSource=admin&replicaSet=rs0&directConnection=true', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+
 
 // Use blog routes
 app.use('/api/blogs', blogRoutes);
